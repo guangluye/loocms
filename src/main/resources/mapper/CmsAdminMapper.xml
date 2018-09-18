@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loo.loocms.dao.CmsAdminMapper">
+	<resultMap id="BaseResultMap" type="com.loo.loocms.entity.CmsAdmin">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="user" property="user" jdbcType="VARCHAR"/>
+		<result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="INTEGER"/>
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+		<result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+		<result column="email" property="email" jdbcType="VARCHAR"/>
+		<result column="phone" property="phone" jdbcType="VARCHAR"/>
+		<result column="role" property="role" jdbcType="INTEGER"/>
+		<result column="del_st" property="delSt" jdbcType="INTEGER"/>
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.loo.loocms.entity.CmsAdmin" extends="BaseResultMap">
+		<result column="remarks" property="remarks" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user, pwd, sex, nick_name, head_img, email, phone, role, del_st
+	</sql>
+	<sql id="Blob_Column_List">
+		remarks
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		,
+		<include refid="Blob_Column_List"/>
+		from cms_admin
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete
+		from cms_admin
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.loo.loocms.entity.CmsAdmin">
+		insert into cms_admin (id, user, pwd, sex, nick_name, head_img, email, phone, role, del_st, remarks)
+		values (#{id,jdbcType=INTEGER},
+		        #{user,jdbcType=VARCHAR},
+		        #{pwd,jdbcType=VARCHAR},
+		        #{sex,jdbcType=INTEGER},
+		        #{nickName,jdbcType=VARCHAR},
+		        #{headImg,jdbcType=VARCHAR},
+		        #{email,jdbcType=VARCHAR},
+		        #{phone,jdbcType=VARCHAR},
+		        #{role,jdbcType=INTEGER},
+		        #{delSt,jdbcType=INTEGER},
+		        #{remarks,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.loo.loocms.entity.CmsAdmin">
+		insert into cms_admin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="user != null">
+				user,
+			</if>
+			<if test="pwd != null">
+				pwd,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="headImg != null">
+				head_img,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="role != null">
+				role,
+			</if>
+			<if test="delSt != null">
+				del_st,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="user != null">
+				#{user,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				#{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="headImg != null">
+				#{headImg,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				#{role,jdbcType=INTEGER},
+			</if>
+			<if test="delSt != null">
+				#{delSt,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loo.loocms.entity.CmsAdmin">
+		update cms_admin
+		<set>
+			<if test="user != null">
+				user = #{user,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				pwd = #{pwd,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="headImg != null">
+				head_img = #{headImg,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=INTEGER},
+			</if>
+			<if test="delSt != null">
+				del_st = #{delSt,jdbcType=INTEGER},
+			</if>
+			<if test="remarks != null">
+				remarks = #{remarks,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.loo.loocms.entity.CmsAdmin">
+		update cms_admin
+		set user      = #{user,jdbcType=VARCHAR},
+		    pwd       = #{pwd,jdbcType=VARCHAR},
+		    sex       = #{sex,jdbcType=INTEGER},
+		    nick_name = #{nickName,jdbcType=VARCHAR},
+		    head_img  = #{headImg,jdbcType=VARCHAR},
+		    email     = #{email,jdbcType=VARCHAR},
+		    phone     = #{phone,jdbcType=VARCHAR},
+		    role      = #{role,jdbcType=INTEGER},
+		    del_st    = #{delSt,jdbcType=INTEGER},
+		    remarks   = #{remarks,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loo.loocms.entity.CmsAdmin">
+		update cms_admin
+		set user      = #{user,jdbcType=VARCHAR},
+		    pwd       = #{pwd,jdbcType=VARCHAR},
+		    sex       = #{sex,jdbcType=INTEGER},
+		    nick_name = #{nickName,jdbcType=VARCHAR},
+		    head_img  = #{headImg,jdbcType=VARCHAR},
+		    email     = #{email,jdbcType=VARCHAR},
+		    phone     = #{phone,jdbcType=VARCHAR},
+		    role      = #{role,jdbcType=INTEGER},
+		    del_st    = #{delSt,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

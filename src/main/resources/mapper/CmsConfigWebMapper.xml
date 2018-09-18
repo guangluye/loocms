@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loo.loocms.dao.CmsConfigWebMapper">
+	<resultMap id="BaseResultMap" type="com.loo.loocms.entity.CmsConfigWeb">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="cms_name" property="cmsName" jdbcType="VARCHAR"/>
+		<result column="author" property="author" jdbcType="VARCHAR"/>
+		<result column="home_page" property="homePage" jdbcType="VARCHAR"/>
+		<result column="servicer" property="servicer" jdbcType="VARCHAR"/>
+		<result column="data_base" property="dataBase" jdbcType="VARCHAR"/>
+		<result column="powerby" property="powerby" jdbcType="VARCHAR"/>
+		<result column="record" property="record" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.loo.loocms.entity.CmsConfigWeb" extends="BaseResultMap">
+		<result column="description" property="description" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, cms_name, author, home_page, servicer, data_base, powerby, record
+	</sql>
+	<sql id="Blob_Column_List">
+		description
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		,
+		<include refid="Blob_Column_List"/>
+		from cms_config_web
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete
+		from cms_config_web
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.loo.loocms.entity.CmsConfigWeb">
+		insert into cms_config_web (id, cms_name, author, home_page, servicer, data_base, powerby, record, description)
+		values (#{id,jdbcType=INTEGER},
+		        #{cmsName,jdbcType=VARCHAR},
+		        #{author,jdbcType=VARCHAR},
+		        #{homePage,jdbcType=VARCHAR},
+		        #{servicer,jdbcType=VARCHAR},
+		        #{dataBase,jdbcType=VARCHAR},
+		        #{powerby,jdbcType=VARCHAR},
+		        #{record,jdbcType=VARCHAR},
+		        #{description,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.loo.loocms.entity.CmsConfigWeb">
+		insert into cms_config_web
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cmsName != null">
+				cms_name,
+			</if>
+			<if test="author != null">
+				author,
+			</if>
+			<if test="homePage != null">
+				home_page,
+			</if>
+			<if test="servicer != null">
+				servicer,
+			</if>
+			<if test="dataBase != null">
+				data_base,
+			</if>
+			<if test="powerby != null">
+				powerby,
+			</if>
+			<if test="record != null">
+				record,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cmsName != null">
+				#{cmsName,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="homePage != null">
+				#{homePage,jdbcType=VARCHAR},
+			</if>
+			<if test="servicer != null">
+				#{servicer,jdbcType=VARCHAR},
+			</if>
+			<if test="dataBase != null">
+				#{dataBase,jdbcType=VARCHAR},
+			</if>
+			<if test="powerby != null">
+				#{powerby,jdbcType=VARCHAR},
+			</if>
+			<if test="record != null">
+				#{record,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loo.loocms.entity.CmsConfigWeb">
+		update cms_config_web
+		<set>
+			<if test="cmsName != null">
+				cms_name = #{cmsName,jdbcType=VARCHAR},
+			</if>
+			<if test="author != null">
+				author = #{author,jdbcType=VARCHAR},
+			</if>
+			<if test="homePage != null">
+				home_page = #{homePage,jdbcType=VARCHAR},
+			</if>
+			<if test="servicer != null">
+				servicer = #{servicer,jdbcType=VARCHAR},
+			</if>
+			<if test="dataBase != null">
+				data_base = #{dataBase,jdbcType=VARCHAR},
+			</if>
+			<if test="powerby != null">
+				powerby = #{powerby,jdbcType=VARCHAR},
+			</if>
+			<if test="record != null">
+				record = #{record,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.loo.loocms.entity.CmsConfigWeb">
+		update cms_config_web
+		set cms_name    = #{cmsName,jdbcType=VARCHAR},
+		    author      = #{author,jdbcType=VARCHAR},
+		    home_page   = #{homePage,jdbcType=VARCHAR},
+		    servicer    = #{servicer,jdbcType=VARCHAR},
+		    data_base   = #{dataBase,jdbcType=VARCHAR},
+		    powerby     = #{powerby,jdbcType=VARCHAR},
+		    record      = #{record,jdbcType=VARCHAR},
+		    description = #{description,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loo.loocms.entity.CmsConfigWeb">
+		update cms_config_web
+		set cms_name  = #{cmsName,jdbcType=VARCHAR},
+		    author    = #{author,jdbcType=VARCHAR},
+		    home_page = #{homePage,jdbcType=VARCHAR},
+		    servicer  = #{servicer,jdbcType=VARCHAR},
+		    data_base = #{dataBase,jdbcType=VARCHAR},
+		    powerby   = #{powerby,jdbcType=VARCHAR},
+		    record    = #{record,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

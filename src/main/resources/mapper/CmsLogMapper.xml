@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loo.loocms.dao.CmsLogMapper">
+	<resultMap id="BaseResultMap" type="com.loo.loocms.entity.CmsLog">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="url" property="url" jdbcType="VARCHAR"/>
+		<result column="method" property="method" jdbcType="VARCHAR"/>
+		<result column="admin_name" property="adminName" jdbcType="VARCHAR"/>
+		<result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.loo.loocms.entity.CmsLog" extends="BaseResultMap">
+		<result column="query_string" property="queryString" jdbcType="LONGVARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, url, method, admin_name, create_time
+	</sql>
+	<sql id="Blob_Column_List">
+		query_string
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		,
+		<include refid="Blob_Column_List"/>
+		from cms_log
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete
+		from cms_log
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.loo.loocms.entity.CmsLog">
+		insert into cms_log (id, url, method, admin_name, create_time, query_string)
+		values (#{id,jdbcType=INTEGER},
+		        #{url,jdbcType=VARCHAR},
+		        #{method,jdbcType=VARCHAR},
+		        #{adminName,jdbcType=VARCHAR},
+		        #{createTime,jdbcType=VARCHAR},
+		        #{queryString,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.loo.loocms.entity.CmsLog">
+		insert into cms_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="method != null">
+				method,
+			</if>
+			<if test="adminName != null">
+				admin_name,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="queryString != null">
+				query_string,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				#{method,jdbcType=VARCHAR},
+			</if>
+			<if test="adminName != null">
+				#{adminName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="queryString != null">
+				#{queryString,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loo.loocms.entity.CmsLog">
+		update cms_log
+		<set>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="method != null">
+				method = #{method,jdbcType=VARCHAR},
+			</if>
+			<if test="adminName != null">
+				admin_name = #{adminName,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="queryString != null">
+				query_string = #{queryString,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.loo.loocms.entity.CmsLog">
+		update cms_log
+		set url          = #{url,jdbcType=VARCHAR},
+		    method       = #{method,jdbcType=VARCHAR},
+		    admin_name   = #{adminName,jdbcType=VARCHAR},
+		    create_time  = #{createTime,jdbcType=VARCHAR},
+		    query_string = #{queryString,jdbcType=LONGVARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loo.loocms.entity.CmsLog">
+		update cms_log
+		set url         = #{url,jdbcType=VARCHAR},
+		    method      = #{method,jdbcType=VARCHAR},
+		    admin_name  = #{adminName,jdbcType=VARCHAR},
+		    create_time = #{createTime,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

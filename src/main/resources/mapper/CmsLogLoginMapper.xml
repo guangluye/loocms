@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.loo.loocms.dao.CmsLogLoginMapper">
+	<resultMap id="BaseResultMap" type="com.loo.loocms.entity.CmsLogLogin">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="login_ip" property="loginIp" jdbcType="VARCHAR"/>
+		<result column="login_admin_id" property="loginAdminId" jdbcType="INTEGER"/>
+		<result column="login_time" property="loginTime" jdbcType="VARCHAR"/>
+		<result column="login_address" property="loginAddress" jdbcType="VARCHAR"/>
+		<result column="login_admin_name" property="loginAdminName" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, login_ip, login_admin_id, login_time, login_address, login_admin_name
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List"/>
+		from cms_log_login
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete
+		from cms_log_login
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.loo.loocms.entity.CmsLogLogin">
+		insert into cms_log_login (id, login_ip, login_admin_id, login_time, login_address, login_admin_name)
+		values (#{id,jdbcType=INTEGER},
+		        #{loginIp,jdbcType=VARCHAR},
+		        #{loginAdminId,jdbcType=INTEGER},
+		        #{loginTime,jdbcType=VARCHAR},
+		        #{loginAddress,jdbcType=VARCHAR},
+		        #{loginAdminName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.loo.loocms.entity.CmsLogLogin">
+		insert into cms_log_login
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="loginIp != null">
+				login_ip,
+			</if>
+			<if test="loginAdminId != null">
+				login_admin_id,
+			</if>
+			<if test="loginTime != null">
+				login_time,
+			</if>
+			<if test="loginAddress != null">
+				login_address,
+			</if>
+			<if test="loginAdminName != null">
+				login_admin_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="loginIp != null">
+				#{loginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAdminId != null">
+				#{loginAdminId,jdbcType=INTEGER},
+			</if>
+			<if test="loginTime != null">
+				#{loginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAddress != null">
+				#{loginAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAdminName != null">
+				#{loginAdminName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.loo.loocms.entity.CmsLogLogin">
+		update cms_log_login
+		<set>
+			<if test="loginIp != null">
+				login_ip = #{loginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAdminId != null">
+				login_admin_id = #{loginAdminId,jdbcType=INTEGER},
+			</if>
+			<if test="loginTime != null">
+				login_time = #{loginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAddress != null">
+				login_address = #{loginAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="loginAdminName != null">
+				login_admin_name = #{loginAdminName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.loo.loocms.entity.CmsLogLogin">
+		update cms_log_login
+		set login_ip         = #{loginIp,jdbcType=VARCHAR},
+		    login_admin_id   = #{loginAdminId,jdbcType=INTEGER},
+		    login_time       = #{loginTime,jdbcType=VARCHAR},
+		    login_address    = #{loginAddress,jdbcType=VARCHAR},
+		    login_admin_name = #{loginAdminName,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
